@@ -14,33 +14,16 @@ git添加文件步骤：
  	1. 使用git status 查看状态
  	2. 通过添加文件步骤，进行提交。
 
-git init 初始化
+文件提交回滚：
 
-git add .    添加当前目录下的所有文件到GitHub
+1. 通过git log查看哈希码
+2. git reset 哈希码回滚。
+3. 再进行add、commit等操作。
 
-git add  文件名   添加指定文件到GitHub
+回滚错误再回滚：
 
-git commit -m ‘提交注释’
+1. 通过git reflog 查看哈希码
+2. 再通过git reset 哈希码执行操作。
 
-git push  上传
 
-git pull  更新代码
-
-git status 查看状态
-
-git clone 链接地址  clone项目代码
-
-git log 查看日志
-
-git checkout -- 文件名 撤回修改内容
-
-git rm 文件名  删除文件
-
-git --help   # 帮助命令 
-
-git pull origin master   # 将远程仓库里面的项目拉下来
-
-dir             # 查看有哪些文件夹
-
-git rm -r --cached target    # 删除target文件夹
 
