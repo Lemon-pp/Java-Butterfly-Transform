@@ -146,4 +146,30 @@ https://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.h
 
 ### 五、Oracle学习
 
+##### 1.使用PLSQL连接Oracle创建用户和授予权限
+
+1. 首先用sys登录PLSQL
+
+2. 找到users，右键新建
+
+   ![1587956364137](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\1587956364137.png)
+
+3. 填写内容，一定要给权限，不然会导致后续出错。
+
+   ![1587956422177](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\1587956422177.png)
+
+   ![1587956432142](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\1587956432142.png)
+
+   权限说明：
+
+   connect : 基本操作表的权限，比如增删改查、视图创建等 
+   resource： 创建一些函数，比如簇、索引，创建表、列等 
+   dba : 相当于管理员权限，拥有系统所有权限 
+
+4. 点击应用。创建完成。
+
+   ![1587956514334](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\1587956514334.png)
+
+   然后进行登录，用户名emptest,密码自己设置的，我的是Oracle123.端口还是1521，选择normal登录。
+
 后续补充！
