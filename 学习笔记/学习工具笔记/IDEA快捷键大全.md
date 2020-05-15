@@ -20,7 +20,9 @@
 
 格式化代码：Ctrl+Alt+L
 
+查看方法参数：Ctrl+P
 
+IDEA刷新项目/清除项目缓存：点击File -> Invalidate caches ，点击之后在弹出框中点击确认，之后软件就自动重启了。
 
 
 
