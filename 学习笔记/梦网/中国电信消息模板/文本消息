@@ -1,0 +1,27 @@
+"messageList": [
+    {
+        "contentType": "text/plain",
+        "contentEncoding": "utf8", 
+        "contentText": "hello world"
+    }
+],
+
+{
+    "recvText": "default",
+    "type": "text",
+    "text": "Hi，我是灵鸽小助手，灵鸽是一个找人找服务的智能搜索应用，解决问题找灵鸽！",
+    "suggestions": []
+}
+
+{
+    "recvText": "default",
+    "type": "text",
+    "messageList": [
+        {
+            "contentType": "text/plain",
+            "contentEncoding": "utf8", 
+            "contentText": "hello world"
+        }
+    ]
+    "suggestions": []
+}

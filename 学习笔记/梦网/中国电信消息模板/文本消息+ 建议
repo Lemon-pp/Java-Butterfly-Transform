@@ -1,0 +1,55 @@
+"messageList": [
+    {
+        "contentType": "text/plain",
+        "contentText": "hello world"
+    },
+    {
+        "contentType": "application/vnd.gsma.botsuggestion.v1.0+json", 
+        "contentText": {
+            "suggestions": [
+                {
+                    "reply": {
+                        "displayText": "Yes", 
+                        "postback": {
+                            "data": "set_by_chatbot_reply_yes"
+                        }   
+                    }
+                },
+                {
+                    "reply": {
+                        "displayText": "No", 
+                        "postback": {
+                            "data": "set_by_chatbot_reply_no"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "urlAction": {
+                            "openUrl": {
+                                "url": "https://www.10010.com"
+                            }
+                        },
+                        "displayText": "Open website or deep link", 
+                        "postback": {
+                            "data": "set_by_chatbot_open_url"
+                        }
+                    }
+                },
+                {
+                    "action": {
+                        "dialerAction": { 
+                            "dialPhoneNumber": {
+                                "phoneNumber": "+1650253000"
+                            }
+                        },
+                        "displayText": "Call a phone number", 
+                        "postback": {
+                            "data": "set_by_chatbot_open_dialer"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+],

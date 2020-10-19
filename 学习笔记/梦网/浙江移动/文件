@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<msg:outboundMessageRequest xmlns:msg="urn:oma:xml:rest:netapi:messaging:1">
+  <address>tel:+8619585550103</address>
+  <destinationAddress>tel:+8619585550103</destinationAddress>
+  <senderAddress>sip:1065051121295@botplatform.rcs.chinamobile.com</senderAddress>
+  <senderName>MyName</senderName>
+<outboundIMMessage>
+<conversationID>1111</conversationID>
+<contributionID>1111</contributionID>
+<contentType>application/vnd.gsma.rcs-ft-http+xml</contentType>
+<serviceCapability>
+<capabilityId> ChatbotSA </capabilityId>
+<version>+g.gsma.rcs.botversion=&quot;#=1&quot;</version>
+</serviceCapability>
+<messageId>5eae954c-42ca-4181-9ab4-9c0ef2e2ac66</messageId>
+<bodyText>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<file xmlns="urn:gsma:params:xml:ns:rcs:rcs:fthttp">
+<file-info type="thumbnail">
+<file-size>7427</file-size>
+<content-type>image/jpeg</content-type>
+<data
+url="https://ftcontentserver.rcs.mnc123.mcc456.pub.3gppnetwork.org/ftsf-
+58cdb29d1-a3d3-427c-a8a4-a496759fbf6b" until="2017-04-25T12:17:07Z"/>
+</file-info>
+<file-info type="file">
+<file-size>183524</file-size>
+<file-name>DSC_379395051.JPG</file-name>
+<content-type>image/jpeg</content-type>
+<data
+url="https://ftcontentserver.rcs.mnc123.mcc456.pub.3gppnetwork.org/ftsf-
+0d5ea6d1-a94c-2-9634-2d90244d3e8e" until="2017-04-25T12:17:07Z"/>
+</file-info>
+</file>]]>
+</ bodyText>
+</outboundIMMessage>
+<clientCorrelator>567895</clientCorrelator>
+</msg:outboundMessageRequest>

@@ -1,0 +1,153 @@
+[
+    {
+        "menuName": "公司官网",
+        "type": "single",
+        "menu": {
+            "entries": 
+            [
+                {
+                    "reply": 
+                    {
+                        "displayText": "公司官网",
+                        "postback": 
+                        {
+                            "data": "公司官网"
+                        }
+                    }
+                }
+            ] 
+        }
+    },
+    {
+        "menuName": "产品服务",
+        "type": "single",
+        "menu": {
+            "entries": 
+            [
+                {
+                    "reply": 
+                    {
+                        "displayText": "产品服务",
+                        "postback": 
+                        {
+                            "data": "产品服务"
+                        }
+                    }
+                }
+            ] 
+        }
+    },
+    {
+        "menuName": "更多选项",
+        "type": "prototype",
+        "menu": {
+            "entries": 
+            [
+                {
+                    "reply": 
+                    {
+                        "displayText": "更多选项",
+                    }
+                },
+                {
+                    "menu":
+                    {
+                        "menuName": "解决方案",
+                        "type": "single",
+                        "displayText": "解决方案",
+                        "entries":
+                        [
+                            {
+                                "reply":
+                                {
+                                    "displayText": "解决方案",
+                                    "postback":
+                                    {
+                                        "data": "解决方案"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "menu":
+                    {
+                        "menuName": "关于我们",
+                        "type": "single",
+                        "displayText": "关于我们",
+                        "entries":
+                        [
+                            {
+                                "reply":
+                                {
+                                    "displayText": "关于我们",
+                                    "postback":
+                                    {
+                                        "data": "关于我们"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                } 
+            ] 
+        }
+    }
+
+
+,
+    {
+        "menuName": "更多选项",
+        "menu": {
+            "entries":
+            [
+                {
+                    "reply":
+                    {
+                        "displayText": "更多选项"
+                    }
+                },
+                {
+                    "menu":
+                    {
+                        "menuName": "解决方案",
+                        "displayText": "解决方案",
+                        "entries":
+                        [
+                            {
+                                "reply":
+                                {
+                                    "displayText": "解决方案",
+                                    "postback":
+                                    {
+                                        "data": "解决方案"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "menu":
+                    {
+                        "menuName": "关于我们",
+                        "displayText": "关于我们",
+                        "entries":
+                        [
+                            {
+                                "reply":
+                                {
+                                    "displayText": "关于我们",
+                                    "postback":
+                                    {
+                                        "data": "关于我们"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }

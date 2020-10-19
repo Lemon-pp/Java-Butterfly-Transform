@@ -450,3 +450,22 @@ error while loading shared libraries: libodbc.so.1: cannot open shared object fi
 2.删除文件1mwsmsgw_4000_99  和2spgate_3000_100
 
 3.重新使用工具【网关部署辅助工具.exe】部署mw短信网关，短信spgate
+
+### 十、遇到的问题
+
+1.如果注册mw网关，注册失败，请查看网络
+
+```bash
+##
+需要在IPV4网络设置中添加外网地址：192.168.x.x
+同时网关地址要改为：192.168.1.1
+```
+
+2.如果发送发送，显示refuse，connection timeout
+
+```bash
+########
+说明IP地址没配好
+
+```
+
