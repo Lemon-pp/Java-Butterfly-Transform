@@ -73,7 +73,9 @@ nginx -s reload
 ### 5、配置nginx.conf
 
 ```shell
+## 配置监听地址和端口
 
+## 配置代理地址和端口
 ```
 
 
