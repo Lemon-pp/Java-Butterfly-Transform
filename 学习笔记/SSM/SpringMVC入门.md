@@ -14,7 +14,7 @@ C：Controller控制器，控制整个网站的跳转逻辑（Servlet）
 
 ### SpringMVC三层架构
 
-
+![image-20201113113548932](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20201113113548932.png)
 
 ## 2.注解
 
@@ -170,9 +170,189 @@ http://localhost:8080/test/{name}?id=123
 作用：
 
 ```
-获取请求头中某个key的值
+获取请求头中某个key的值，能够将请求头中的变量值映射到控制器的参数中
+```
+
+参数：
+
+```
+1、value：参数名称
+
+2、required：是否必须
+
+3、defaultValue：默认值
+```
+
+例子：
+
+```java
+@RequestMapping("/test1")
+    public String hello7(@RequestHeader(value = "user-agents", required = false) String id){
+        System.out.println("拿到请求头：" + id);
+        return "success";
+    }
 ```
 
 
 
 ### @CookieValue
+
+作用：
+
+```
+用来获取Cookie中的值
+```
+
+参数：
+
+```
+1、value：参数名称
+
+2、required：是否必须
+
+3、defaultValue：默认值
+```
+
+## 5.数据到页面
+
+除了传入原生request和session，SpringMVC还提供了很多其他方式将数据带给页面。
+
+### 在方法出传入Map、Model、ModelMap
+
+**Map，Model，ModelMap的作用域都是request。**
+
+三者关系：
+
+通过getclass，可以看到`Map`，`Model`，`ModelMap`最终都是`BindingAwareModelMap`在工作；相当于给`BindingAwareModelMap`中保存的东西都会被放在请求域中。
+
+例子：
+
+```java
+@RequestMapping("/hello1")
+    public String hello1(Map<String, Object> map){
+        System.out.println("数据输出，map");
+        map.put("msg", "你好");
+        System.out.println(map.getClass());
+        return "success";
+    }
+
+    @RequestMapping("/hello2")
+    public String hello2(Model model){
+        model.addAttribute("msg", "我是output1()");
+        return "success";
+    }
+
+    @RequestMapping("/hello3")
+    public String hello3(ModelMap modelMap){
+        modelMap.addAttribute("msg", "我是output3()");
+        return "success";
+    }
+```
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false"%>
+
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<h1>success</h1>
+${msg}
+</body>
+</html>
+```
+
+```jsp
+## 使用JSTL需要导入两个jar包
+<dependency>
+      <groupId>javax.servlet.jsp.jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+    
+在jsp页面导入标签：
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+```
+
+还会有个小问题：
+由于Servlet版本原因，会导致EL表达式无法被解析到.，所以需要设置：
+
+```jsp
+<%@ page isELIgnored="false"%>
+```
+
+或者：修改web.xml
+
+```xml
+ <?xml version="1.0" encoding="UTF-8"?>
+2 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+3          xmlns="http://java.sun.com/xml/ns/javaee"
+4          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+5          id="WebApp_ID" version="3.0">
+```
+
+### 方法返回值使用ModeAndView
+
+ModeAndView
+
+既包含视图信息（页面地址），也包含模型数据（给页面带的数据）；数据均保存在请求域中。
+
+page域：在页面
+
+session域：在一个session中，运行时间长，数据量大，容易崩。
+
+request域：数据存放在请求域中，请求结束，数据消失，比较利于程序运行。
+
+application域：不仅自己可以看，其他也能看到，信息不安全。
+
+所以使用最多的是request域。
+
+例子：
+
+```Java
+@RequestMapping("/hello4")
+    public ModelAndView hello4(){
+        ModelAndView modelAndView = new ModelAndView("success");
+        //或者
+        //ModelAndView modelAndView = new ModelAndView();
+        //modelAndView.setViewName("success");
+        modelAndView.addObject("msg", "hello");
+       
+        return modelAndView;
+    }
+
+```
+
+## 使用@SessionAttributes注解为session域中暂存数据
+
+使用`@SessionAttributes(value = "msg")`注解会在给`BindingAwareModelMap`中保存数据的同时，为session中存放一份。value指定保存数据时要给session中存放的key。
+
+- `value = {"msg"}`：只要保存的是这种key的数据，给session中存放一份。
+- `types={String.class}`：只要保存的是这种类型的数据，给session中存放一份。
+- 需要放在类上
+
+```Java
+@SessionAttributes(value = "msg")
+@Controller
+public class OutputController {
+
+	@RequestMapping("handler01")
+	public String handler01(Map<String, Object> map) {
+		map.put("msg", "你好");
+		System.out.println("map的类型是：" + map.getClass());
+		return "success";
+	}
+}
+
+```
+
+SpringMVC虽然提供了为session存放数据的@SessionAttributes注解，不过还是推荐使用原始API，因为使用SpringMVC提供的注解可能会引发异常。
