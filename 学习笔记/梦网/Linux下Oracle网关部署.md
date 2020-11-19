@@ -70,7 +70,7 @@ chmod: changing permissions of ‘install.sh’: Operation not permitted
 
 ​	./install.sh
 
-4.部署执行完后，执行目录：source ~/.bashrc(注意bashrc前面有一个点“.”)
+4.部署执行完后，执行目录：source ~/.bashrc    (注意bashrc前面有一个点“.”)
 
 5.安装完成后使用service命令检测cu服务是否已经启动。
 
@@ -217,7 +217,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/empgw/local/unixODBC/lib
 
 ​	export TNS_ADMIN=/home/empgw/local/etc
 
-3.配置ORACLE客户端TNS：修改TNS_ADMIN对应目录下（/home/empgw/local/etc）的tnsnames.ora文件(如果没有则创建)。添加内容如下。中EMP_ORACLE为一个标识名，配置文件odbc.ini中的ServerName项要与之相对应，SERVICE_NAME为数据库名，HOST为数据库所在主机IP地址，PORT为数据库监听端口号。
+3.配置ORACLE客户端TNS：修改TNS_ADMIN对应目录下（/home/empgw/local/etc）的tnsnames.ora文件(如果没有则创建)。添加内容如下。中EMP_ORACLE为一个标识名，配置文件odbc.ini中的ServerName项要与之相对应，SERVICE_NAME后跟要访问的数据库名(该项需要根据oracle数据库服务端的**listener.ora配置的保持一致**，SERVICE_NAME为数据库名，HOST为数据库所在主机IP地址，PORT为数据库监听端口号。
 
 ```
 EMP_ORACLE=
@@ -232,7 +232,7 @@ EMP_ORACLE=
 	   )
 ```
 
-4.配置odbcinst.ini文件：在**/home/emp****gw****/local/unixODBC/etc**目录下，如果存在则直接编辑，不存在则创建文件，添加内容如下。其中$(EMPGW_HOME)为网关的主目录。
+4.配置odbcinst.ini文件：在**/home/empgw/local/unixODBC/etc**目录下，如果存在则直接编辑，不存在则创建文件，添加内容如下。其中$(EMPGW_HOME)为网关的主目录。
 
 ```
 [Oracle]
@@ -254,7 +254,7 @@ Threading=2
 
 
 
-5.配置odbc.ini文件：在**/home/emp****gw****/local/unixODBC/etc**目录下，如果存在则直接编辑，不存在则创建文件，添加内容如下。主标签[ORA_EMPSVR]为配置的ODBC数据源名称，网关程序的配置文件中需要进行添加，Driver = Oracle 中的Oralcle对应的是步骤3.4 odbcinst.ini中配置的主标签；Servername = EMP_ORACLE中的EMP_ORACLE对应的是步骤3.3 tnsnames.ora中配置的主标签。
+5.配置odbc.ini文件：在**/home/empgw/local/unixODBC/etc**目录下，如果存在则直接编辑，不存在则创建文件，添加内容如下。主标签[ORA_EMPSVR]为配置的ODBC数据源名称，网关程序的配置文件中需要进行添加，Driver = Oracle 中的Oralcle对应的是步骤3.4 odbcinst.ini中配置的主标签；Servername = EMP_ORACLE中的EMP_ORACLE对应的是步骤3.3 tnsnames.ora中配置的主标签。
 
 ```
 [ORA_EMPSVR]
@@ -300,6 +300,7 @@ SQL>
 
 ```
 1.如果测试数据源是否通畅时候，出现错误，没有办法可以试着修改主机名。
+2.直接把listener.ora和tnsnames.ora里面的HOST改成主机名
 ```
 
 ### 七、LINUX网关序列号注册
@@ -398,7 +399,7 @@ error while loading shared libraries: libodbc.so.1: cannot open shared object fi
 
 执行spgate64_r_3000_100，加&表示为守护进程，即使CTRL+C也不会停止进程
 
-​	./mwsmsgw64_r_4000_99 &
+​	./spgate64_r_3000_100 &
 
 执行monitor
 

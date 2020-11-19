@@ -1,4 +1,4 @@
-# SpringMVC入门及搭建
+# SpringMVC项目搭建
 
 ## 1、新建项目
 

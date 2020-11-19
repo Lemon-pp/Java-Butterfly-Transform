@@ -332,7 +332,7 @@ application域：不仅自己可以看，其他也能看到，信息不安全。
 
 ```
 
-## 使用@SessionAttributes注解为session域中暂存数据
+### 使用@SessionAttributes注解为session域中暂存数据
 
 使用`@SessionAttributes(value = "msg")`注解会在给`BindingAwareModelMap`中保存数据的同时，为session中存放一份。value指定保存数据时要给session中存放的key。
 
@@ -356,3 +356,98 @@ public class OutputController {
 ```
 
 SpringMVC虽然提供了为session存放数据的@SessionAttributes注解，不过还是推荐使用原始API，因为使用SpringMVC提供的注解可能会引发异常。
+
+## 6.视图解析
+
+**forward转发**
+
+```Java
+<!--创建视图解析器对象-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--表示文件所在位置-->
+        <property name="prefix" value="/WEB-INF/pages/"></property>
+        <!--表示文件后缀名-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+```
+
+一般配置了视图解析器，在返回页面的时候会根据返回值进行拼接跳转到页面，但是如果页面放在了其他地方，而不是视图解析器配置的地方，则可以使用forward前缀指定转发或者使用相对路径。
+
+语法：
+
+```bash
+forward:转发的路径
+```
+
+两种作用：
+
+1. 转发到指定页面
+2. 转发到指定请求
+
+```java
+//转发到指定页面
+@RequestMapping("/hello5")
+    public String hello5(){
+        System.out.println("转发");
+        return "forward:/forwardtest.jsp";
+    }
+
+//转发到指定请求
+@RequestMapping("/hello6")
+    public String hello6(){
+        System.out.println("转发2");
+        return "forward:/hello5";
+    }
+```
+
+**redirect重定向**
+
+语法：
+
+```
+redirect:重定向路径
+```
+
+两种作用：
+
+1. 转发到指定页面
+2. 转发到指定请求
+
+```java
+@RequestMapping("/hello7")
+    public String hello7(){
+        System.out.println("转发");
+        return "redirect:/forwardtest.jsp";
+    }
+
+    @RequestMapping("/hello8")
+    public String hello8(){
+        System.out.println("转发2");
+        return "redirect:/hello7";
+    }
+```
+
+**转发和重定向区别：**
+
+```
+区别：
+	1.转发是浏览器上的网址不变，重定向时 浏览器上的网址改变为重定向的路径。
+	2.转发只有一次请求，重定向实际上产生了两次请求。
+	3.转发的网址必须是本站点的网址，重定向时的网址可以是任何网址。
+	4.转发：以前的request中存放的变量不会失效，就像把两个页面拼到了一起。重定向：以前的request中存放的变量全部失效，并进入一个新的request作用域。
+	
+转发：
+　　发送请求 -->服务器运行-->进行请求的重新设置，例如通过request.setAttribute(name,value)-->根据转发的地址，获取该地址的网页-->响应请求给浏览器
+　　
+重定向：
+　　发送请求 -->服务器运行-->响应请求，返回给浏览器一个新的地址与响应码-->浏览器根据响应码，判定该响应为重定向，自动发送一个新的请求给服务器，请求地址为之前返回的地址-->服务器运行-->响应请求给浏览器
+```
+
+**浏览器控制台过滤请求**：
+
+```
+使用-xx
+例如：过滤js和css请求
+-js -css  中间用空格隔开
+```
+
