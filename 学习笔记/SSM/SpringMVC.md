@@ -82,6 +82,22 @@ public String hello2(@PathVariable("id") String id, @PathVariable("name") String
 }
 ```
 
+### @ResponseBody
+
+作用：
+
+```
+作用：将方法的返回值，以特定的格式写入到response的body区域，进而将数据返回给客户端。
+
+当方法上面没有写ResponseBody,底层会将方法的返回值封装为ModelAndView对象。
+
+如果返回值是字符串，那么直接将字符串写到客户端；如果是一个对象，会将对象转化为json串，然后写到客户端。
+```
+
+### @RequestBody
+
+获取请求的请求体。
+
 ## 3.Restful架构
 
 参考：
@@ -853,5 +869,11 @@ ${errors.passwrod}
 
 3. 页面取值
 
+## 8.Ajax
 
+1.导依赖
+
+2.写配置
+
+3.测试
 
