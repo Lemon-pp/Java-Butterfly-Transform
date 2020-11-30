@@ -229,6 +229,48 @@ http://localhost:8080/test/{name}?id=123
 3、defaultValue：默认值
 ```
 
+
+
+### HttpEntity
+
+作用：接收发过来的请求的整个请求信息。包括请求头和请求题。
+
+例子：
+
+```Java
+<a href="/hello12?username=zhangsan">HttpEntity接收请求信息</a><br>
+
+@RequestMapping("/hello12")
+    public String hello12(HttpEntity<String> body){
+        System.out.println(body);
+        return "success";
+    }
+```
+
+
+
+### ResponseEntity
+
+作用：响应数据到页面。可以设置响应头、响应体、响应状态码。
+
+例子：
+
+```Java
+<a href="/hello13">ResponseEntity返回响应数据</a><br>
+
+@RequestMapping("/hello13")
+    public ResponseEntity<String> hello13(){
+        String body = "<h1>succssssssssssssss";
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("abc", "abc");
+        ResponseEntity responseEntity = new ResponseEntity<String>(body, headers, HttpStatus.OK);
+        System.out.println(responseEntity);
+        return responseEntity;
+    }
+```
+
+
+
 ## 5.数据到页面
 
 除了传入原生request和session，SpringMVC还提供了很多其他方式将数据带给页面。
@@ -869,6 +911,8 @@ ${errors.passwrod}
 
 3. 页面取值
 
+   
+
 ## 8.Ajax
 
 1.导依赖
@@ -876,4 +920,130 @@ ${errors.passwrod}
 2.写配置
 
 3.测试
+
+
+
+## 9.文件上传与下载
+
+1.导jar包
+
+```xml
+<dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.3.3</version>
+    </dependency>
+```
+
+2.在springmvc.xml中配置multiPartResolver：
+
+```xml
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="123456456123"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+```
+
+3.写页面发请求
+
+```jsp
+<form action="/upload" enctype="multipart/form-data" method="post">
+    <table>
+        <tr>
+            <td>请选择文件：</td>
+            <td><input type="file" name="file"></td>
+        </tr>
+        <tr>
+            <td>开始上传</td>
+            <td><input type="submit" value="上传"></td>
+        </tr>
+    </table>
+</form>
+```
+
+4.控制器上传图片
+
+步骤：
+
+```
+1.MultipartFile获取文件地址
+
+2.将文件写入目标文件地址（transferTo）
+```
+
+多文件上传步骤：
+
+```
+1.MultipartFile[]获取多个文件地址
+
+2.遍历，将文件写入目标文件地址（transferTo）
+```
+
+
+
+```java
+@RequestMapping(value="/upload")
+    public String upload(@RequestParam("file") MultipartFile file){
+        if (!file.isEmpty()) {
+            String storePath= "E:\\编程\\学习项目\\SpringMVC01\\upload";//存放我们上传的文件路径
+            String fileName = file.getOriginalFilename();
+            File filepath = new File(storePath, fileName);
+            if (!filepath.getParentFile().exists()) {
+                filepath.getParentFile().mkdirs();//如果目录不存在，创建目录
+            }
+            try {
+                file.transferTo(new File(storePath+File.separator+fileName));//把文件写入目标文件地址
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "error";
+            }
+            return "success";//返回到成功页面
+        }else {
+            return "error";//返回到失败的页面
+        }
+
+    }
+```
+
+**文件下载：**
+
+步骤：
+
+```
+1.获得下载文件的路径
+
+2.获得字节输入流或者文件输入流
+
+3.创建byte数组接收流 available:获取输入流所读取的文件的最大字节数
+
+4.把字节读取到数组中
+
+5.返回响应到浏览器
+```
+
+例子：
+
+```java
+@GetMapping("download/{filename}")
+    public ResponseEntity<byte[]> download(@PathVariable String filename) throws IOException {
+        //获得下载文件的路径(这里绝对路径)
+        String filepath= "E:\\编程\\学习项目\\SpringMVC01\\upload\\"+filename + ".png";
+        System.out.println(filename);
+        File file =new File(filepath);
+        //获得字节输入流或者文件输入流
+        InputStream in = new FileInputStream(file);
+        //available:获取输入流所读取的文件的最大字节数
+        byte[] body = new byte[in.available()];
+        //把字节读取到数组中
+        in.read(body);
+        //设置请求头
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attchement;filename=" + file.getName());
+        //设置响应状态
+        HttpStatus statusCode = HttpStatus.OK;
+        ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(body, headers, statusCode);
+        in.close();
+        return entity;//返回
+    }
+```
 
