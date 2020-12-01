@@ -976,7 +976,7 @@ ${errors.passwrod}
 ```
 1.MultipartFile[]获取多个文件地址
 
-2.遍历，将文件写入目标文件地址（transferTo）
+2.遍历数组，将文件写入目标文件地址（transferTo）
 ```
 
 
