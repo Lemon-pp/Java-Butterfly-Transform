@@ -44,3 +44,17 @@ next
 ![image-20210129030037292](https://i.loli.net/2021/01/29/rZfKJbIpwcDqxG5.png)
 
 安装完成！
+
+
+
+## 3.git账号设置
+
+```shell
+## 1.设置用户名
+git config --global user.name "Lemon-pp"
+
+## 2.设置邮箱
+git config --global user.email "you@example.com"
+```
+
+设置完成！
