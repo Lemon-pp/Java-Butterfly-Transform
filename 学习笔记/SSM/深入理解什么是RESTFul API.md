@@ -4,7 +4,7 @@
 
 REST这个词，是[Roy Thomas Fielding](http://en.wikipedia.org/wiki/Roy_Fielding)在他2000年的[博士论文](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)中提出的。
 
-![img](https:////upload-images.jianshu.io/upload_images/6098829-93425f66895062ac.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/450/format/webp)
+![image-20201217154005430](https://i.loli.net/2020/12/17/fMBaINgsE6tHFJ5.png)
 
 
  　Fielding是一个非常重要的人，他是HTTP协议（1.0版和1.1版）的主要设计者、Apache服务器软件的作者之一、Apache基金会的第一任主席。所以，他的这篇论文一经发表，就引起了关注，并且立即对互联网开发产生了深远的影响。

@@ -14,7 +14,7 @@ C：Controller控制器，控制整个网站的跳转逻辑（Servlet）
 
 ### SpringMVC三层架构
 
-![image-20201113113548932](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20201113113548932.png)
+![image-20201113113548932](https://i.loli.net/2020/12/17/nyJXMvQTB1oYAc5.png)
 
 ## 2.注解
 
@@ -1046,4 +1046,10 @@ ${errors.passwrod}
         return entity;//返回
     }
 ```
+
+## 10.拦截器
+
+参考博客：https://www.cnblogs.com/black-spike/p/7813238.html
+
+
 

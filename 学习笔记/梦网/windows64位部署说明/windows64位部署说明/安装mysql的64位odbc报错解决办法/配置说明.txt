@@ -1,0 +1,2 @@
+文件放于路径:C:\Windows\System32
+用于解决安装mysql 64位驱动报错问题
