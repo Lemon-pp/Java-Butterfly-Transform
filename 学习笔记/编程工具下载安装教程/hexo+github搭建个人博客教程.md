@@ -447,3 +447,19 @@ hexo new 'my-first-blog'
 hexo new page '名字'
 ```
 
+**提交多个页面：**
+
+```shell
+## 清除页面
+hexo clean
+
+## 生成页面
+hexo g
+
+## 打开本地服务
+hexo s
+
+## 推送到github
+hexo d
+```
+
