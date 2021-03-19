@@ -450,3 +450,88 @@ public void hello12() {
 
 
 这里的参数和前面的也都差不多，注意就是多了一个请求类型的参数，然后创建一个 HttpEntity 作为参数来传递。 HttpEntity 在创建时候需要传递两个参数，第一个上文给了一个 null ，这个参数实际上就相当于 POST/PUT 请求中的第二个参数，有需要可以自行定义。HttpEntity 创建时的第二个参数就是请求头了，也就是说，如果使用 exchange 来发送请求，可以直接定义请求头，而不需要使用拦截器。
+
+
+
+# demo
+
+`url`:
+
+```java
+https://aip.baidubce.com/rest/2.0/face/v1/faceliveness/sessioncode?access_token=24.566e6f23f8da535bc8a731a926d11f5c.2592000.1618738965.282335-23828167
+```
+
+`header`:
+
+```java
+Content-Type	application/x-www-form-urlencoded
+```
+
+`body`:
+
+```java
+type	0
+min_code_length	   3
+max_code_length	   6
+```
+
+
+
+配置类：
+
+```java
+@Configuration
+public class RestTemplateConfig {
+
+    @Autowired
+    RestTemplateBuilder builder;
+
+    @Bean
+    public RestTemplate getRestTemplate(){
+       return builder.build();
+    }
+}
+```
+
+
+
+发送请求类：
+
+```java
+@Component
+public class CheckUtil {
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    private final String requestUrl = "https://aip.baidubce.com/rest/2.0/face/v1/faceliveness/sessioncode?access_token=";
+
+    public ResponseEntity<String> checknum(){
+        //1.url
+        //2.消息头
+        //3.消息体
+        try {
+            String access_token = TokenUtil.access_token;
+            String url = requestUrl + access_token;
+            //请求头
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            //请求体
+            MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+            map.add("type","0");
+            map.add("min_code_length","3");
+            map.add("max_code_length","6");
+            //组装
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+			//发送
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, request, String.class);
+            System.out.println(responseEntity);
+            return responseEntity;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+       return null;
+    }
+}
+```
+
